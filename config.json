@@ -2,22 +2,22 @@
     "feeds": [
       {
         "url": "https://spacenews.com/feed",
-        "num_entries": "2",
+        "num_entries": "all",
         "update_frequency": 3600 
       },
       {
         "url": "https://www.satellitetoday.com/feed/",
-        "num_entries": "2",
+        "num_entries": "all",
         "update_frequency": 3600
       },
       {
         "url": "https://www.nasaspaceflight.com/feed/",
-        "num_entries": "2",
+        "num_entries": "all",
         "update_frequency": 3600
       },
       {
         "url": "https://news.satnews.com/feed/",
-        "num_entries": "2",
+        "num_entries": "all",
         "update_frequency": 3600
       }
     ]
