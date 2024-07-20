@@ -25,6 +25,7 @@ class SummaryData(db.Model):
     title = db.Column(db.String)
     link = db.Column(db.String, unique=True, nullable=False)
     pub_date = db.Column(db.TEXT)
+    bj_pub_date = db.Column(db.DateTime)
     summary_title = db.Column(db.String)
     summary_content = db.Column(db.String)
     summary_image = db.Column(db.String, nullable=True)
@@ -33,6 +34,7 @@ class SummaryData(db.Model):
             'id': self.id,
             'title': self.title,
             'link': self.link,
+            'bj_pub_date': self.bj_pub_date,
             'pub_date': self.pub_date,
             'summary_title': self.summary_title,
             'summary_content': self.summary_content,

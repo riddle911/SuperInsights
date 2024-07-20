@@ -1,10 +1,12 @@
 import json
 
 class Config:
+    # 读取配置文件
     with open('config.json', 'r') as f:
         config_data = json.load(f)
-    
-    RSS_URLS = config_data.get('rss_urls', [])
+
+    # 获取 RSS feed 列表
+    RSS_FEEDS = config_data.get('feeds', [])
     SQLALCHEMY_DATABASE_URI = 'sqlite:///rss.db'
     JINA_API_KEY = 'jina_69774ca7f6eb4afeb2a11f83076720041YFr3qoNM2hGp5DFlAPJ_UZfISmh'
     SILICONFLOW_API_KEY = 'sk-ltntgjbizjfarxzuocugfsxrbdjgefydhiemorhqnfmitshl'

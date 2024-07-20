@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简报系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .summary-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .summary-card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .summary-card img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>简报系统</h1>
+    {% for summary in summary_list %}
+        <div class="summary-card">
+            <h2>{{ summary.summary_title }}</h2>
+            <p>{{ summary.bj_pub_date }}</p>
+            {% if summary.summary_image %}
+                <img src="{{ summary.summary_image }}" alt="{{ summary.summary_title }}">
+            {% endif %}
+            <p>{{ summary.summary_content }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

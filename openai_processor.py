@@ -33,14 +33,16 @@ def generate_summary(jina_data):
         "authorization": f"Bearer {openai_key}"
     }
 
-    # 发送请求到 SiliconFlow
-    siliconflow_response = requests.post(siliconflow_url, json=siliconflow_payload, headers=siliconflow_headers)
-    response = siliconflow_response.json()
-    # 提取 SiliconFlow 的响应
-    result_content = response['choices'][0]['message']['content']
-    
-    # 处理 SiliconFlow 的响应
-    if siliconflow_response.status_code == 200:
+    try:
+        # 使用 requests 发送请求到 SiliconFlow，设置超时时间为 15 秒
+        siliconflow_response = requests.post(siliconflow_url, json=siliconflow_payload, headers=siliconflow_headers, timeout=15)
+        siliconflow_response.raise_for_status()  # 检查 HTTP 状态码，如果发生错误，则抛出异常
+
+        # 解析 SiliconFlow 的响应
+        response = siliconflow_response.json()
+        result_content = response['choices'][0]['message']['content']
+
+        # 处理 SiliconFlow 的响应
         print("Generated summary successfully.")
         # 解析 result_content 中的 JSON 数据
         try:
@@ -51,6 +53,10 @@ def generate_summary(jina_data):
         except json.JSONDecodeError as e:
             print(f"Failed to parse JSON response: {e}")
             return None
-    else:
-        print(f"SiliconFlow 请求失败，状态码：{siliconflow_response.status_code}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"SiliconFlow 请求错误：{e}")
+        return None
+    except json.decoder.JSONDecodeError as e:
+        print(f"Failed to parse JSON response: {e}")
         return None

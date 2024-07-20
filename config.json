@@ -1,8 +1,24 @@
 {
-    "rss_urls": [
-        "https://spacenews.com/feed",
-        "https://www.satellitetoday.com/feed/",
-        "https://www.nasaspaceflight.com/feed/",
-        "https://news.satnews.com/feed/"
+    "feeds": [
+      {
+        "url": "https://spacenews.com/feed",
+        "num_entries": "2",
+        "update_frequency": 3600 
+      },
+      {
+        "url": "https://www.satellitetoday.com/feed/",
+        "num_entries": "2",
+        "update_frequency": 3600
+      },
+      {
+        "url": "https://www.nasaspaceflight.com/feed/",
+        "num_entries": "2",
+        "update_frequency": 3600
+      },
+      {
+        "url": "https://news.satnews.com/feed/",
+        "num_entries": "2",
+        "update_frequency": 3600
+      }
     ]
-}
+  }
