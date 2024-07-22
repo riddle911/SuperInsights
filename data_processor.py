@@ -4,7 +4,6 @@ from models import RawData, SummaryData, db
 from datetime import datetime
 import pytz
 
-
 def convert_to_beijing_time(rss_time_str):
     """将 RSS 时间字符串转换为北京时间。
 
@@ -33,15 +32,21 @@ def fetch_html_and_update_raw_data():
 
 def generate_summaries_and_save():
     """生成摘要并保存到 SummaryData 表中,同时处理datetime"""
-    db.session.query(SummaryData).delete()
+    # db.session.query(SummaryData).delete()  #  如果需要每次都清空 SummaryData 表，请取消注释
     raw_data_entries = RawData.query.filter(RawData.raw_html.isnot(None)).all()
     print(f"Generating summaries for {len(raw_data_entries)} RawData entries.")
     for entry in raw_data_entries:
         print(f"Generating summary for HTML content from: {entry.link}")
         summary_data = generate_summary(entry.raw_html)
-# 将 RSS 时间字符串转换为北京时间
+        # 将 RSS 时间字符串转换为北京时间
         if summary_data:
             bj_pub_date = convert_to_beijing_time(entry.pub_date)
+            # 检查 SummaryData 中是否已经存在此链接
+            existing_summary = SummaryData.query.filter_by(link=entry.link).first()
+            if existing_summary:
+                print(f"Summary for link {entry.link} already exists, skipping.")
+                continue  # 跳过此链接
+            
             summary = SummaryData(
                 title=entry.title,
                 link=entry.link,
@@ -53,4 +58,4 @@ def generate_summaries_and_save():
             )
             db.session.add(summary)
             db.session.commit()
-            print(f"Added summary for link: {entry.link} to SummaryData table.")
+            print(f"Added summary for link: {entry.link} to SummaryData table.")  
