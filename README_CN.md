@@ -17,6 +17,11 @@ SuperInsights 是一个基于 Large Language Models (LLMs) 的工具，用于从
 - **🔗 丰富的LLM支撑服务**：支持 OpenAI 及兼容 OpenAI 接口的在线 LLM 推理服务。
 - **📊 基础的前端展示系统**：提供一个基于 MVC 开发的简单的前端展示页面，用以向用户展示数据。
 
+## 支持数据源
+
+- 支持各种公开可访问的网站
+- 不支持微信公众号、社交媒体（微博、X）等，如有需求可联系作者定制。
+
 ## 系统前端展示
 
 ![image](https://github.com/user-attachments/assets/2bf08923-2699-4c1b-8bd9-035a871e76d7)
