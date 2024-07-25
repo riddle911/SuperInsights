@@ -30,10 +30,6 @@ SuperInsights 是一个基于 Large Language Models (LLMs) 的工具，用于从
 ### 快速开始
 
 1. 克隆此仓库到您的本地环境
-   ```bash
-   git clone https://github.com/your_username/SuperInsights.git
-   cd SuperInsights
-   ```
 
 2. 安装依赖项:
    ```bash
