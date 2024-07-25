@@ -1,0 +1,14 @@
+{
+    "feeds": [
+      {
+        "url": "https://example.com",
+        "num_entries": "all",
+        "update_frequency": 3600 
+      },
+      {
+        "url": "https://example.com",
+        "num_entries": "5",
+        "update_frequency": 3600
+      }
+    ]
+  }
