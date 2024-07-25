@@ -33,10 +33,6 @@ You can leverage this project to quickly build daily industry reports, market in
 ### Quick Start
 
 1. Clone this repository to your local environment
-   ```bash
-   git clone https://github.com/your_username/SuperInsights.git
-   cd SuperInsights
-   ```
 
 2. Install dependencies:
    ```bash
