@@ -1,7 +1,7 @@
 
 # 🚀 SuperInsights
 
-[中文版本](https://github.com/riddle911/SuperInsights/new/main?filename=README_CN.md)
+[中文版本](https://github.com/riddle911/SuperInsights/blob/main/README_CN.md)
 
 🚀 **No need to write crawlers, get key information instantly, and power your open-source intelligence!**
 
