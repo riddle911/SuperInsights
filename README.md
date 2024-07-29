@@ -66,7 +66,7 @@ You can leverage this project to quickly build daily industry reports, market in
          # Get RSS feed list
          RSS_FEEDS = config_data.get('feeds', [])
          SQLALCHEMY_DATABASE_URI = 'sqlite:///rss.db'
-         # JINA_API_KEY = '' # jinareader's key, obtain from https://jina.ai/
+         JINA_API_KEY = '' # jinareader's key, obtain from https://jina.ai/
          OPENAI_API_KEY = '' # Obtain from your LLM service provider
          FETCH_INTERVAL = 3600  # Default fetching interval 1 hour
          OPENAI_URL = ''  # Obtain from your LLM service provider
