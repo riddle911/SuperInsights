@@ -69,11 +69,11 @@ SuperInsights 是一个基于 Large Language Models (LLMs) 的工具，用于从
          # 获取 RSS feed 列表
          RSS_FEEDS = config_data.get('feeds', [])
          SQLALCHEMY_DATABASE_URI = 'sqlite:///rss.db'
-         # JINA_API_KEY = '' # jinareader的key，通过 https://jina.ai/ 获取
-         OPENAI_API_KEY = '' # 通过你的 LLM 服务商获取
+         **JINA_API_KEY = '' # jinareader的key，通过 https://jina.ai/ 获取**
+         **OPENAI_API_KEY = '' # 通过你的 LLM 服务商获取**
          FETCH_INTERVAL = 3600  # 默认抓取间隔 1 小时
-         OPENAI_URL = ''  # 通过你的 LLM 服务商获取
-         OPENAI_MODEL = ''  # 通过你的 LLM 服务商获取
+         **OPENAI_URL = ''  # 通过你的 LLM 服务商获取**
+         **OPENAI_MODEL = ''  # 通过你的 LLM 服务商获取**
      ```
 5. **Prompt 配置**
    - 在 `openai_processor.py` 文件中，作者预置了一个 prompt，你可以按需修改。
