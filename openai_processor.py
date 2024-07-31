@@ -2,7 +2,7 @@ import requests
 from config import Config
 import json
 
-openai_key = Config.Config.OPENAI_API_KEY
+openai_key = Config.OPENAI_API_KEY
 openai_url = Config.OPENAI_URL
 MODEL = Config.OPENAI_MODEL
 
