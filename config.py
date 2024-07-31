@@ -12,3 +12,4 @@ class Config:
     FETCH_INTERVAL = 3600  # 默认抓取间隔1小时
     OPENAI_URL = ' '
     OPENAI_MODEL = ' '
+    JINA_API_KEY = ''
