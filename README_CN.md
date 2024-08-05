@@ -43,8 +43,9 @@ SuperInsights 是一个基于 Large Language Models (LLMs) 的工具，用于从
    ```
 
 3. 一些必要配置:
-   - 首先，在 `config.json` 设置你需要关注的信息源，本软件默认支持 RSS URL。
-     - 什么是RSS？请搜索了解，大部分资讯类网站均有 RSS Feed 提供。若无，可通过 [PolitePol](https://politepol.com/) 等服务将任意网站转换为 RSS Feed。
+   - 首先，在 `config.json` 设置你需要关注的信息源，本软件默认仅支持 RSS URL。
+     - 什么是RSS？请搜索了解。**你需要自行构造消息源的RSS链接**
+     - 大部分资讯类网站均有 RSS Feed 提供。若无，可通过 [PolitePol](https://politepol.com/) 等服务将任意网站转换为 RSS Feed。
      - 在 `config.json` 中，设置示例如下：
        ```json
        "feeds": [
