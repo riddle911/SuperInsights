@@ -8,15 +8,14 @@ MODEL = Config.OPENAI_MODEL
 
 def generate_summary(jina_data):
     #print(f"Generating summary for HTML content.")
-    prompt = '''你的任务是作为一个高级翻译和编辑，理解发给你的内容，从中生产加工输出以下信息：标题、正文、图片。确保你的响应符合以下JSON结构，准确反映提取的数据，不做修改：```json
-    {
-    "title": "文章标题",
-    "content": "文章摘要",
-    "image": "文章包含的图片链接，保留url，如果没有留空"
-    }
-```重要的是你的输出严格遵守这种格式。
-    -严格确保统一翻译为中文
-    -不翻译公司名称、人名    '''
+    prompt = '''你的任务是担任资深编辑，接收并理解所提供的内容，然后按照以下要求输出信息：文章标题、正文摘要、图片链接。全文摘要保持在200字左右。请确保你的回复严格遵循以下JSON格式，准确提取信息，不做任何修改，并确保所有内容转换为中文，但公司名称和人名保持原样。若内容中无图片，则图片链接字段留空。JSON结构如下：
+
+```json
+{
+  "title": "文章标题",
+  "content": "文章摘要",
+  "image": "文章中的图片链接，仅包含http格式的URL，若无图片则留空"
+} '''
     siliconflow_url = openai_url
     siliconflow_payload = {
         "model": MODEL,
