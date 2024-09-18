@@ -2,7 +2,7 @@ import feedparser
 from datetime import datetime
 import json
 import time
-from models import RSSFeed, RawData, db
+from models import RSSFeed, RawData, db, SummaryData
 
 # 从配置文件加载 RSS feed 列表
 def load_rss_feeds_from_config(config_path="config.json"):
@@ -78,6 +78,9 @@ def parse_rss_feed(url, config_path="config.json"):
 
 # 更新 RSS 订阅
 def update_rss_feeds():
+    #db.session.query(SummaryData).delete()  #  如果需要每次都清空 SummaryData 表，请取消注释
+    #db.session.query(RawData).delete()  #  如果需要每次都清空 RawData 表，请取消注释
+    #db.session.query(RSSFeed).delete()
     """更新 RSS 订阅并保存到 RawData 和 RSSFeed 表中"""
     urls = load_rss_feeds_from_config()
     print(f"Updating RSS feeds for URLs: {urls}")

@@ -6,6 +6,8 @@ from models import db, RSSFeed, RawData, SummaryData
 from rss_updater import update_rss_feeds
 from data_processor import fetch_html_and_update_raw_data, generate_summaries_and_save
 import atexit
+from sendmail import send_summary_email
+from dailynews import dailynews
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)
@@ -44,6 +46,14 @@ def index():
     summary_list = [summary.to_dict() for summary in summarydata]
     return render_template('index.html', summary_list=summary_list)
 
+@app.route('/dailynews')
+def dailynews_route():
+    return dailynews()
+
+@app.route('/send_email')
+def send_email_route():
+    send_summary_email()
+    return jsonify({'message': 'Email sent successfully.'})
 
 def shutdown_scheduler():
     print("Scheduler is not running.")

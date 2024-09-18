@@ -1,8 +1,24 @@
 from html_fetcher import fetch_html
 from openai_processor import generate_summary
-from models import RawData, SummaryData, db
+from models import RawData, SummaryData, db, RSSFeed
 from datetime import datetime
 import pytz
+import re
+
+def extract_url(text):
+    """从给定的文本中提取第一个 URL。
+
+    Args:
+      text: 包含 URL 的文本
+
+    Returns:
+      提取的 URL，如果没有找到 URL 则返回空字符串
+    """
+    url_pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+    match = url_pattern.search(text)
+    if match:
+        return match.group(0)
+    return ''
 
 def convert_to_beijing_time(rss_time_str):
     """将 RSS 时间字符串转换为北京时间。
@@ -15,8 +31,8 @@ def convert_to_beijing_time(rss_time_str):
     """
     beijing_tz = pytz.timezone('Asia/Shanghai')
     dt = datetime.strptime(rss_time_str, "%a, %d %b %Y %H:%M:%S %z")
-    dt_utc = dt.astimezone(pytz.utc)
-    dt_beijing = dt_utc.astimezone(beijing_tz)
+    #dt_utc = dt.astimezone(pytz.utc)
+    dt_beijing = dt.astimezone(beijing_tz)
     return dt_beijing 
 
 def fetch_html_and_update_raw_data():
@@ -30,9 +46,14 @@ def fetch_html_and_update_raw_data():
         db.session.commit()
         print(f"Updated RawData entry with raw_html for link: {entry.link}")
 
+
+    #db.session.query(SummaryData).delete()  #  如果需要每次都清空 SummaryData 表，请取消注释
+    #db.session.query(RawData).delete()  #  如果需要每次都清空 RawData 表，请取消注释
+    #db.session.query(RSSFeed).delete()
+
 def generate_summaries_and_save():
+    #db.session.query(SummaryData).delete() 
     """生成摘要并保存到 SummaryData 表中,同时处理datetime"""
-    # db.session.query(SummaryData).delete()  #  如果需要每次都清空 SummaryData 表，请取消注释
     raw_data_entries = RawData.query.filter(RawData.raw_html.isnot(None)).all()
     print(f"Generating summaries for {len(raw_data_entries)} RawData entries.")
     for entry in raw_data_entries:
@@ -47,15 +68,17 @@ def generate_summaries_and_save():
                 print(f"Summary for link {entry.link} already exists, skipping.")
                 continue  # 跳过此链接
             
+            summary_image_url = extract_url(summary_data.get('image', ''))
+            
             summary = SummaryData(
                 title=entry.title,
                 link=entry.link,
-                pub_date = entry.pub_date,
-                bj_pub_date = bj_pub_date,
+                pub_date=entry.pub_date,
+                bj_pub_date=bj_pub_date,
                 summary_title=summary_data.get('title', ''),
                 summary_content=summary_data.get('content', ''),
-                summary_image=summary_data.get('image', ''),
+                summary_image=summary_image_url,
             )
             db.session.add(summary)
             db.session.commit()
-            print(f"Added summary for link: {entry.link} to SummaryData table.")  
+            print(f"Added summary for link: {entry.link} to SummaryData table.")
